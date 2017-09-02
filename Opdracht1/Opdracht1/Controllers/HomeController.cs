@@ -1,35 +1,63 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Opdracht1.Models;
 
 namespace Opdracht1.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        public ViewResult Index()
+        {
+            ViewBag.Date = DateTime.Today.ToString("d MMMM yyyy");
+            return View();
+        }
+
+        [HttpGet]
+        public ViewResult BirthdayForm()
         {
             return View();
         }
 
-        public IActionResult About()
+        [HttpPost]
+        public ViewResult BirthdayForm(BirthdayResponse birthdayResponse)
         {
-            ViewData["Message"] = "Your application description page.";
+            DateTime today = DateTime.Today;
+            DateTime birthday = new DateTime(birthdayResponse.Year, birthdayResponse.Month, birthdayResponse.Day);
+            DateTime next = birthday.AddYears(today.Year - birthday.Year);
 
-            return View();
+            int now = int.Parse(DateTime.Now.ToString("yyyyMMdd"));
+            int dob = int.Parse(birthday.ToString("yyyyMMdd"));
+            
+            //Calculate age by dropping the last 4 digits
+            int age = (now - dob) / 10000;
+            ViewBag.AgePlusOne = age + 1;
+
+            if (next < today)
+            {
+                next = next.AddYears(1);
+            }
+
+            if (next == today)
+            {
+                return View("HappyBirthday", birthdayResponse);
+            }
+            else
+            {
+
+                int numDays = (next - today).Days;
+
+                if (numDays == 1)
+                {
+                    ViewBag.DaysUntilBirthday = numDays + " dag";
+                }
+                else
+                {
+                    ViewBag.DaysUntilBirthday = numDays + " dagen";
+                }
+
+                return View("Countdown", birthdayResponse);
+            }
         }
 
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Error()
-        {
-            return View();
-        }
     }
 }

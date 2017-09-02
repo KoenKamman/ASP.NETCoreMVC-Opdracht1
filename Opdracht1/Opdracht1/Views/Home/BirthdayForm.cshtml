@@ -1,0 +1,37 @@
+﻿@model Opdracht1.Models.BirthdayResponse
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>BirthdayForm</title>
+</head>
+<body>
+    <form asp-action="BirthdayForm" method="post">
+        <p>
+            <label asp-for="Name">Voer je naam in:</label>
+            <input asp-for="Name" />
+        </p>
+        <p>
+            Voer je geboortedatum in:
+        </p>
+        <p>
+            <label asp-for="Day">dag</label>
+            <input asp-for="Day" />
+        </p>
+        <p>
+            <label asp-for="Month">maand</label>
+            <input asp-for="Month" />
+        </p>
+        <p>
+            <label asp-for="Year">jaar</label>
+            <input asp-for="Year" />
+        </p>
+        <button type="submit">Bereken</button>
+    </form>
+</body>
+</html>

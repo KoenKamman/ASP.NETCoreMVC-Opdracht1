@@ -1,0 +1,19 @@
+﻿@model Opdracht1.Models.BirthdayResponse
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Countdown</title>
+</head>
+<body>
+    <p>
+        Nog @ViewBag.DaysUntilBirthday tot je @ViewBag.AgePlusOne<sup>e</sup> verjaardag, @Model.Name!
+    </p>
+    <a asp-action="Index">Home</a>
+</body>
+</html>
