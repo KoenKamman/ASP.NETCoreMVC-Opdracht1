@@ -9,6 +9,8 @@ namespace Opdracht1.Models
     public class BirthdayResponse
     {
         [Required(ErrorMessage = "Please enter your name")]
+        [RegularExpression(@" ^[a - zA - Z] + $",
+            ErrorMessage = "Please enter a valid name")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Please enter a day")]
@@ -16,11 +18,11 @@ namespace Opdracht1.Models
         public int Day { get; set; }
 
         [Required(ErrorMessage = "Please enter a month")]
-        [Range(1, 12, ErrorMessage = "Please enter a valid day")]
+        [Range(1, 12, ErrorMessage = "Please enter a valid month")]
         public int Month { get; set; }
 
         [Required(ErrorMessage = "Please enter a year")]
-        [Range(1900, 3000, ErrorMessage = "Please enter a valid day")]
+        [Range(1900, 3000, ErrorMessage = "Please enter a valid year")]
         public int Year { get; set; }
     }
 }
