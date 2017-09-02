@@ -9,11 +9,15 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Countdown</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/StyleSheet.css" />
 </head>
 <body>
-    <p>
-        Nog @ViewBag.DaysUntilBirthday tot je @ViewBag.AgePlusOne<sup>e</sup> verjaardag, @Model.Name!
-    </p>
-    <a asp-action="Index">Home</a>
+    <div class="wrapper">
+        <p>
+            Nog @ViewBag.DaysUntilBirthday tot je @ViewBag.AgePlusOne<sup>e</sup> verjaardag, @Model.Name!
+        </p>
+        <a asp-action="Index">Home</a>
+    </div>
 </body>
 </html>

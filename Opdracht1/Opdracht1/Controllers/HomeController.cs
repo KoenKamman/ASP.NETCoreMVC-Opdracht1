@@ -21,41 +21,50 @@ namespace Opdracht1.Controllers
         [HttpPost]
         public ViewResult BirthdayForm(BirthdayResponse birthdayResponse)
         {
-            DateTime today = DateTime.Today;
-            DateTime birthday = new DateTime(birthdayResponse.Year, birthdayResponse.Month, birthdayResponse.Day);
-            DateTime next = birthday.AddYears(today.Year - birthday.Year);
-
-            int now = int.Parse(DateTime.Now.ToString("yyyyMMdd"));
-            int dob = int.Parse(birthday.ToString("yyyyMMdd"));
-            
-            //Calculate age by dropping the last 4 digits
-            int age = (now - dob) / 10000;
-            ViewBag.AgePlusOne = age + 1;
-
-            if (next < today)
+            //Validation
+            if (ModelState.IsValid)
             {
-                next = next.AddYears(1);
-            }
+                DateTime today = DateTime.Today;
+                DateTime birthday = new DateTime(birthdayResponse.Year, birthdayResponse.Month, birthdayResponse.Day);
+                DateTime next = birthday.AddYears(today.Year - birthday.Year);
 
-            if (next == today)
-            {
-                return View("HappyBirthday", birthdayResponse);
-            }
-            else
-            {
+                int now = int.Parse(DateTime.Now.ToString("yyyyMMdd"));
+                int dob = int.Parse(birthday.ToString("yyyyMMdd"));
 
-                int numDays = (next - today).Days;
+                //Calculate age by dropping the last 4 digits
+                int age = (now - dob) / 10000;
+                ViewBag.AgePlusOne = age + 1;
 
-                if (numDays == 1)
+                if (next < today)
                 {
-                    ViewBag.DaysUntilBirthday = numDays + " dag";
+                    next = next.AddYears(1);
+                }
+
+                if (next == today)
+                {
+                    return View("HappyBirthday", birthdayResponse);
                 }
                 else
                 {
-                    ViewBag.DaysUntilBirthday = numDays + " dagen";
-                }
 
-                return View("Countdown", birthdayResponse);
+                    int numDays = (next - today).Days;
+
+                    if (numDays == 1)
+                    {
+                        ViewBag.DaysUntilBirthday = numDays + " dag";
+                    }
+                    else
+                    {
+                        ViewBag.DaysUntilBirthday = numDays + " dagen";
+                    }
+
+                    return View("Countdown", birthdayResponse);
+                }
+            }
+            else
+            {
+                //Validation error
+                return View();
             }
         }
 

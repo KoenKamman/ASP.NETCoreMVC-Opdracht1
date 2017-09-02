@@ -9,11 +9,17 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Countdown</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/StyleSheet.css" />
 </head>
 <body>
-    <h1>@Model.Name</h1>
-    <img src="/images/gefeliciteerd.jpg" />
-    <p>Met je @ViewBag.AgePlusOne<sup>e</sup> verjaardag</p>
-    <a asp-action="Index">Home</a>
+    <div class="wrapper">
+        <h1 class="col-md-12">@Model.Name</h1>
+        <img src="/images/gefeliciteerd.jpg" class="col-md-12" id="imageCongr"/>
+        <p class="col-md-12">
+            Met je @ViewBag.AgePlusOne<sup>e</sup> verjaardag
+        </p>
+        <a asp-action="Index" class="col-md-12">Home</a>
+    </div>
 </body>
 </html>

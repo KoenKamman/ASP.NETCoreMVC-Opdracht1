@@ -9,29 +9,32 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>BirthdayForm</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/StyleSheet.css" />
 </head>
 <body>
-    <form asp-action="BirthdayForm" method="post">
-        <p>
-            <label asp-for="Name">Voer je naam in:</label>
-            <input asp-for="Name" />
-        </p>
-        <p>
-            Voer je geboortedatum in:
-        </p>
-        <p>
-            <label asp-for="Day">dag</label>
-            <input asp-for="Day" />
-        </p>
-        <p>
-            <label asp-for="Month">maand</label>
-            <input asp-for="Month" />
-        </p>
-        <p>
-            <label asp-for="Year">jaar</label>
-            <input asp-for="Year" />
-        </p>
-        <button type="submit">Bereken</button>
-    </form>
+    <div class="wrapper">
+        <form asp-action="BirthdayForm" method="post">
+            <div asp-validation-summary="All"></div>
+            <p class="row">
+                <label asp-for="Name" class="col-sm-2">Voer je naam in:</label>
+                <input asp-for="Name" class="col-sm-2" />
+            </p>
+            <p class="row">
+                Voer je geboortedatum in:
+            </p>
+            <p class="row">
+                <label asp-for="Day" class="col-sm-2">dag</label>
+                <label asp-for="Month" class="col-sm-2">maand</label>
+                <label asp-for="Year" class="col-sm-2">jaar</label>
+            </p>
+            <p class="row">
+                <input asp-for="Day" class="col-sm-2" />
+                <input asp-for="Month" class="col-sm-2" />
+                <input asp-for="Year" class="col-sm-2" />
+            </p>
+            <button type="submit" class="row">Bereken</button>
+        </form>
+    </div>
 </body>
 </html>
