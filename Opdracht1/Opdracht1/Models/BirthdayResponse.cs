@@ -9,8 +9,6 @@ namespace Opdracht1.Models
     public class BirthdayResponse
     {
         [Required(ErrorMessage = "Please enter your name")]
-        [RegularExpression(@" ^[a - zA - Z] + $",
-            ErrorMessage = "Please enter a valid name")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Please enter a day")]

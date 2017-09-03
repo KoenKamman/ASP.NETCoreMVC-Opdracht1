@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using Opdracht1.Models;
+using Opdracht1.Services;
 
 namespace Opdracht1.Controllers
 {
@@ -21,46 +22,27 @@ namespace Opdracht1.Controllers
         [HttpPost]
         public ViewResult BirthdayForm(BirthdayResponse birthdayResponse)
         {
+
+			var BirthdayService = new BirthdayService();
+
+
+
             //Validation
             if (ModelState.IsValid)
             {
-                DateTime today = DateTime.Today;
                 DateTime birthday = new DateTime(birthdayResponse.Year, birthdayResponse.Month, birthdayResponse.Day);
-                DateTime next = birthday.AddYears(today.Year - birthday.Year);
+	            int daysUntilBirthday = BirthdayService.GetDaysUntilBirthday(birthday);
 
-                int now = int.Parse(DateTime.Now.ToString("yyyyMMdd"));
-                int dob = int.Parse(birthday.ToString("yyyyMMdd"));
+				ViewBag.AgePlusOne = BirthdayService.GetAge(birthday) + 1;
+	            ViewBag.DaysUntilBirthday = BirthdayService.GetDaysUntilBirthday(birthday);
 
-                //Calculate age by dropping the last 4 digits
-                int age = (now - dob) / 10000;
-                ViewBag.AgePlusOne = age + 1;
+	            if (daysUntilBirthday == 0)
+	            {
+		            return View("HappyBirthday", birthdayResponse);
+	            }
 
-                if (next < today)
-                {
-                    next = next.AddYears(1);
-                }
-
-                if (next == today)
-                {
-                    return View("HappyBirthday", birthdayResponse);
-                }
-                else
-                {
-
-                    int numDays = (next - today).Days;
-
-                    if (numDays == 1)
-                    {
-                        ViewBag.DaysUntilBirthday = numDays + " dag";
-                    }
-                    else
-                    {
-                        ViewBag.DaysUntilBirthday = numDays + " dagen";
-                    }
-
-                    return View("Countdown", birthdayResponse);
-                }
-            }
+				return View("Countdown", birthdayResponse);
+			}
             else
             {
                 //Validation error

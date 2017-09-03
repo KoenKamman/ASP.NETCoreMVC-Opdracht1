@@ -1,23 +1,32 @@
 ﻿@model Opdracht1.Models.BirthdayResponse
 
 @{
-    Layout = null;
+	Layout = null;
 }
 
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Countdown</title>
-    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="/css/StyleSheet.css" />
+	<meta name="viewport" content="width=device-width" />
+	<title>Countdown</title>
+	<link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+	<link rel="stylesheet" href="/css/StyleSheet.css" />
 </head>
 <body>
-    <div class="wrapper">
-        <p>
-            Nog @ViewBag.DaysUntilBirthday tot je @ViewBag.AgePlusOne<sup>e</sup> verjaardag, @Model.Name!
-        </p>
-        <a asp-action="Index">Home</a>
-    </div>
+	<div class="wrapper">
+		@if (@ViewBag.DaysUntilBirthday == 1)
+		{
+			<p>
+				Nog @ViewBag.DaysUntilBirthday dag tot je @ViewBag.AgePlusOne<sup>e</sup> verjaardag, @Model.Name!
+			</p>
+		}
+		else
+		{
+			<p>
+				Nog @ViewBag.DaysUntilBirthday dagen tot je @ViewBag.AgePlusOne<sup>e</sup> verjaardag, @Model.Name!
+			</p>
+		}
+		<a asp-action="Index">Home</a>
+	</div>
 </body>
 </html>
