@@ -22,19 +22,15 @@ namespace Opdracht1.Controllers
         [HttpPost]
         public ViewResult BirthdayForm(BirthdayResponse birthdayResponse)
         {
+			var birthdayService = new BirthdayService();
 
-			var BirthdayService = new BirthdayService();
-
-
-
-            //Validation
             if (ModelState.IsValid)
             {
                 DateTime birthday = new DateTime(birthdayResponse.Year, birthdayResponse.Month, birthdayResponse.Day);
-	            int daysUntilBirthday = BirthdayService.GetDaysUntilBirthday(birthday);
+	            int daysUntilBirthday = birthdayService.GetDaysUntilBirthday(birthday);
 
-				ViewBag.AgePlusOne = BirthdayService.GetAge(birthday) + 1;
-	            ViewBag.DaysUntilBirthday = BirthdayService.GetDaysUntilBirthday(birthday);
+				ViewBag.AgePlusOne = birthdayService.GetAge(birthday) + 1;
+	            ViewBag.DaysUntilBirthday = birthdayService.GetDaysUntilBirthday(birthday);
 
 	            if (daysUntilBirthday == 0)
 	            {
