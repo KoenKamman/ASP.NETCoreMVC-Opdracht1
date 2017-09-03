@@ -1,0 +1,19 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/StyleSheet.css" />
+</head>
+<body>
+<div class="wrapper">
+    <p>Het is vandaag: @ViewBag.Date</p>
+    <a asp-action="BirthdayForm">Bereken aantal dagen tot mijn verjaardag</a>
+</div>
+</body>
+</html>
